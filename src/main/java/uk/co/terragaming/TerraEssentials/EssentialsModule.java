@@ -10,7 +10,6 @@ import uk.co.terragaming.TerraCore.TerraPlugin;
 import uk.co.terragaming.TerraCore.Commands.MethodCommandService;
 import uk.co.terragaming.TerraCore.Foundation.GuiceModule;
 import uk.co.terragaming.TerraCore.Foundation.Module;
-import uk.co.terragaming.TerraEssentials.PomData;
 import uk.co.terragaming.TerraEssentials.commands.ClearCommand;
 import uk.co.terragaming.TerraEssentials.commands.EnchantCommand;
 import uk.co.terragaming.TerraEssentials.commands.FeedCommand;
@@ -32,7 +31,7 @@ import uk.co.terragaming.TerraEssentials.listeners.PlayerJoinListener;
 import com.google.inject.Inject;
 import com.google.inject.Provides;
 
-@Module(name = PomData.NAME, version = PomData.VERSION)
+@Module(name = "TerraEssentials", version = "1.0-SNAPSHOT")
 public class EssentialsModule extends GuiceModule{
 
 	@Inject
