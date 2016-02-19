@@ -32,7 +32,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provides;
 
 @Module(name = PomData.NAME, version = PomData.VERSION)
-public class EssentialsModule extends GuiceModule{
+public class TerraEssentials extends GuiceModule{
 
 	@Inject
 	TerraPlugin plugin;
