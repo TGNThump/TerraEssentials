@@ -18,9 +18,9 @@ import uk.co.terragaming.TerraCore.Commands.annotations.Command;
 import uk.co.terragaming.TerraCore.Commands.annotations.Desc;
 import uk.co.terragaming.TerraCore.Commands.annotations.Perm;
 import uk.co.terragaming.TerraCore.Commands.exceptions.CommandException;
+import uk.co.terragaming.TerraCore.Config.ConfigBase.WorldLocation;
 import uk.co.terragaming.TerraCore.Util.Context;
 import uk.co.terragaming.TerraEssentials.config.EssentialsData;
-import uk.co.terragaming.TerraEssentials.config.EssentialsData.WorldLocation;
 
 
 public class HomeCommand {
