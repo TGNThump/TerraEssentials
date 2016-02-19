@@ -5,10 +5,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.inject.Inject;
+
 import ninja.leaping.configurate.objectmapping.Setting;
 import ninja.leaping.configurate.objectmapping.serialize.ConfigSerializable;
 
-import org.spongepowered.api.Sponge;
+import org.spongepowered.api.Server;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.storage.WorldProperties;
@@ -23,10 +25,12 @@ public class EssentialsData extends ConfigBase{
 		super("data", "essentials.conf");
 	}
 	
+	@Inject
+	Server server;
+	
 	@Override
 	public void setDefaults() {
-		
-		WorldProperties world = Sponge.getServer().getDefaultWorld().get();
+		WorldProperties world = server.getDefaultWorld().get();
 		
 		Vector3i spawnPos = world.getSpawnPosition();
 		
@@ -43,12 +47,14 @@ public class EssentialsData extends ConfigBase{
 	@Setting
 	public WorldLocation spawn;
 	
-	
 	@Setting
 	public Map<UUID, WorldLocation> homes;
 	
 	@ConfigSerializable
 	public static class WorldLocation extends ConfigBase.Category{
+		
+		@Inject
+		Server server;
 		
 		@Setting
 		public Double x;
@@ -76,12 +82,12 @@ public class EssentialsData extends ConfigBase{
 		}
 		
 		public Location<World> get(){
-			Optional<World> world = Sponge.getServer().getWorld(worldUUID);
+			Optional<World> world = server.getWorld(worldUUID);
 			if (world.isPresent()){
 				return new Location<World>(world.get(), x, y, z);
 			}
 			
-			return Sponge.getServer().getWorld(Sponge.getServer().getDefaultWorld().get().getUniqueId()).get().getSpawnLocation();
+			return server.getWorld(server.getDefaultWorld().get().getUniqueId()).get().getSpawnLocation();
 		}
 	}
 	

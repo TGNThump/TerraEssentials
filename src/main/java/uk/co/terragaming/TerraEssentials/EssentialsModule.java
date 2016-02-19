@@ -40,7 +40,7 @@ public class EssentialsModule extends GuiceModule{
 	@Inject
 	MethodCommandService commandService;
 	
-	EssentialsData data;
+	private EssentialsData data;
 	
 	@Listener
     public void onInitialize(GameInitializationEvent event) {
