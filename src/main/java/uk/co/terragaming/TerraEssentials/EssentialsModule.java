@@ -31,7 +31,7 @@ import uk.co.terragaming.TerraEssentials.listeners.PlayerJoinListener;
 import com.google.inject.Inject;
 import com.google.inject.Provides;
 
-@Module(name = "TerraEssentials", version = "1.0-SNAPSHOT")
+@Module(name = PomData.NAME, version = PomData.VERSION)
 public class EssentialsModule extends GuiceModule{
 
 	@Inject
