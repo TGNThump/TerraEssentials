@@ -11,11 +11,11 @@ import ninja.leaping.configurate.objectmapping.Setting;
 import org.spongepowered.api.Server;
 import org.spongepowered.api.world.storage.WorldProperties;
 
-import uk.co.terragaming.TerraCore.Config.ConfigBase;
+import uk.co.terragaming.TerraCore.Config.Config;
 
 import com.flowpowered.math.vector.Vector3i;
 
-public class EssentialsData extends ConfigBase{
+public class EssentialsData extends Config{
 
 	public EssentialsData() {
 		super("data", "essentials.conf");
