@@ -1,12 +1,12 @@
 package uk.co.terragaming.TerraEssentials;
 
-import org.spongepowered.api.Sponge;
+import org.spongepowered.api.event.EventManager;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartingServerEvent;
 import org.spongepowered.api.event.game.state.GameStoppedServerEvent;
 
-import uk.co.terragaming.TerraCore.TerraPlugin;
+import uk.co.terragaming.TerraCore.CorePlugin;
 import uk.co.terragaming.TerraCore.Commands.MethodCommandService;
 import uk.co.terragaming.TerraCore.Foundation.GuiceModule;
 import uk.co.terragaming.TerraCore.Foundation.Module;
@@ -35,10 +35,13 @@ import com.google.inject.Provides;
 public class TerraEssentials extends GuiceModule{
 
 	@Inject
-	TerraPlugin plugin;
+	CorePlugin plugin;
 	
 	@Inject
 	MethodCommandService commandService;
+	
+	@Inject
+	EventManager manager;
 	
 	private EssentialsData data;
 	
@@ -64,7 +67,7 @@ public class TerraEssentials extends GuiceModule{
 	@Listener
 	public void onServerStarting(GameStartingServerEvent event){
 		data = new EssentialsData();
-		Sponge.getEventManager().registerListeners(plugin, inject(new PlayerJoinListener()));
+		manager.registerListeners(plugin, inject(new PlayerJoinListener()));
 	}
 	
 	@Listener
