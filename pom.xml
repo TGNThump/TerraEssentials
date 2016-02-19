@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.co.terragaming</groupId>
 	<artifactId>terraessentials</artifactId>
-	<version>0.0</version>
+	<version>0.0.1</version>
 	<name>TerraEssentials</name>
 	<properties>
 		<siteUrlSuffix>${project.version}</siteUrlSuffix>
@@ -256,7 +256,7 @@
 		<dependency>
 			<groupId>uk.co.terragaming</groupId>
 			<artifactId>terracore</artifactId>
-			<version>0.4</version>
+			<version>0.0.1</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
