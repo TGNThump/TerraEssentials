@@ -17,20 +17,19 @@ import uk.co.terragaming.TerraCore.Commands.exceptions.AuthorizationException;
 import uk.co.terragaming.TerraCore.Commands.exceptions.CommandException;
 import uk.co.terragaming.TerraCore.Util.Context;
 
-
 public class GamemodeCommand {
 	
 	@Command("gamemode")
-	@Desc("Set the players gamemode.")
-	@Perm("tc.core.gamemode")
+	@Desc("Set the target players gamemode.")
+	@Perm("tc.essentials.cheats.gamemode")
 	@Alias("gm")
 	public CommandResult onGamemode(Context context,
 		@Desc("The gamemode to set.") GameMode gamemode,
-		@Desc("The player who's gamemode to set.") Player... players
+		@Desc("The players who's gamemode to set.") Player... targets
 	) throws CommandException{
 		CommandSource source = context.get(CommandSource.class);
 		
-		if (players.length == 0){
+		if (targets.length == 0){
 			if (source instanceof Player){
 				Player player = (Player) source;
 				if (player.offer(Keys.GAME_MODE, gamemode).isSuccessful()){
@@ -44,14 +43,14 @@ public class GamemodeCommand {
 				return CommandResult.empty();
 			}
 		} else {
-			for (Player player : players){
+			for (Player player : targets){
 				if (player.equals(source)){
 					if (player.offer(Keys.GAME_MODE, gamemode).isSuccessful()){
 						source.sendMessage(Text.of(TextColors.AQUA, "Set your gamemode to ", TextColors.YELLOW, gamemode.getName(), TextColors.AQUA, "."));
 					} else {
 						throw new CommandException("Could not set players gamemode.");
 					}
-				} else if (player.hasPermission("tc.core.gamemode.others")){
+				} else if (player.hasPermission("tc.essentials.cheats.gamemode.others")){
 					if (player.offer(Keys.GAME_MODE, gamemode).isSuccessful()){
 						source.sendMessage(Text.of(TextColors.AQUA, "Set ", TextColors.YELLOW, player.getName(), TextColors.AQUA, "s gamemode to ", TextColors.YELLOW, gamemode.getName(), TextColors.AQUA, "."));
 						player.sendMessage(Text.of(TextColors.YELLOW, source.getName(), TextColors.AQUA, TextColors.AQUA, " set your gamemode to ", TextColors.YELLOW, gamemode.getName(), TextColors.AQUA, "."));
@@ -68,22 +67,22 @@ public class GamemodeCommand {
 	
 	@Command("gmc")
 	@Desc("Set the players gamemode to creative.")
-	@Perm("tc.core.gamemode")
-	public CommandResult onGamemodeC(Context context, @Desc("The player who's gamemode to set.") Player... players) throws CommandException{
-		return onGamemode(context, GameModes.CREATIVE, players);
+	@Perm("tc.essentials.cheats.gamemode")
+	public CommandResult onGamemodeC(Context context, @Desc("The player who's gamemode to set.") Player... targets) throws CommandException{
+		return onGamemode(context, GameModes.CREATIVE, targets);
 	}
 	
 	@Command("gms")
 	@Desc("Set the players gamemode to survival.")
-	@Perm("tc.core.gamemode")
-	public CommandResult onGamemodeS(Context context, @Desc("The player who's gamemode to set.") Player... players) throws CommandException{
-		return onGamemode(context, GameModes.SURVIVAL, players);
+	@Perm("tc.essentials.cheats.gamemode")
+	public CommandResult onGamemodeS(Context context, @Desc("The player who's gamemode to set.") Player... targets) throws CommandException{
+		return onGamemode(context, GameModes.SURVIVAL, targets);
 	}
 	
 	@Command("gma")
 	@Desc("Set the players gamemode to adventure.")
-	@Perm("tc.core.gamemode")
-	public CommandResult onGamemodeA(Context context, @Desc("The player who's gamemode to set.") Player... players) throws CommandException{
-		return onGamemode(context, GameModes.ADVENTURE, players);
+	@Perm("tc.essentials.cheats.gamemode")
+	public CommandResult onGamemodeA(Context context, @Desc("The player who's gamemode to set.") Player... targets) throws CommandException{
+		return onGamemode(context, GameModes.ADVENTURE, targets);
 	}
 }

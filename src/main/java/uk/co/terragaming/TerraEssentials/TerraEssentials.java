@@ -1,16 +1,16 @@
 package uk.co.terragaming.TerraEssentials;
 
-import org.spongepowered.api.Sponge;
+import org.spongepowered.api.event.EventManager;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GameStartingServerEvent;
 import org.spongepowered.api.event.game.state.GameStoppedServerEvent;
 
-import uk.co.terragaming.TerraCore.TerraPlugin;
+import uk.co.terragaming.TerraCore.CorePlugin;
 import uk.co.terragaming.TerraCore.Commands.MethodCommandService;
+import uk.co.terragaming.TerraCore.Config.Config;
 import uk.co.terragaming.TerraCore.Foundation.GuiceModule;
 import uk.co.terragaming.TerraCore.Foundation.Module;
-import uk.co.terragaming.TerraEssentials.PomData;
 import uk.co.terragaming.TerraEssentials.commands.ClearCommand;
 import uk.co.terragaming.TerraEssentials.commands.EnchantCommand;
 import uk.co.terragaming.TerraEssentials.commands.FeedCommand;
@@ -22,6 +22,7 @@ import uk.co.terragaming.TerraEssentials.commands.InvseeCommand;
 import uk.co.terragaming.TerraEssentials.commands.JumpCommand;
 import uk.co.terragaming.TerraEssentials.commands.SpawnCommand;
 import uk.co.terragaming.TerraEssentials.commands.SpeedCommand;
+import uk.co.terragaming.TerraEssentials.commands.TeleportCommand;
 import uk.co.terragaming.TerraEssentials.commands.ThruCommand;
 import uk.co.terragaming.TerraEssentials.commands.TimeCommand;
 import uk.co.terragaming.TerraEssentials.commands.VanishCommand;
@@ -31,17 +32,26 @@ import uk.co.terragaming.TerraEssentials.listeners.PlayerJoinListener;
 
 import com.google.inject.Inject;
 import com.google.inject.Provides;
+import com.google.inject.name.Names;
 
 @Module(name = PomData.NAME, version = PomData.VERSION)
-public class EssentialsModule extends GuiceModule{
+public class TerraEssentials extends GuiceModule{
 
+	@Override
+	public void configure(){
+		bind(Config.class).annotatedWith(Names.named("EssentialsData")).to(EssentialsData.class);
+	}
+	
 	@Inject
-	TerraPlugin plugin;
+	CorePlugin plugin;
 	
 	@Inject
 	MethodCommandService commandService;
 	
-	EssentialsData data;
+	@Inject
+	EventManager manager;
+	
+	private EssentialsData data;
 	
 	@Listener
     public void onInitialize(GameInitializationEvent event) {
@@ -60,12 +70,13 @@ public class EssentialsModule extends GuiceModule{
 		commandService.registerCommands(plugin, new SpawnCommand());
 		commandService.registerCommands(plugin, new TimeCommand());
 		commandService.registerCommands(plugin, new HomeCommand());
+		commandService.registerCommands(plugin, new TeleportCommand());
 	}
 	
 	@Listener
 	public void onServerStarting(GameStartingServerEvent event){
 		data = new EssentialsData();
-		Sponge.getEventManager().registerListeners(plugin, inject(new PlayerJoinListener()));
+		manager.registerListeners(plugin, inject(new PlayerJoinListener()));
 	}
 	
 	@Listener

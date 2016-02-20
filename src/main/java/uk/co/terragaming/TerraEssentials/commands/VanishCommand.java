@@ -19,15 +19,15 @@ import uk.co.terragaming.TerraCore.Util.Context;
 public class VanishCommand {
 	
 	@Command("vanish")
-	@Desc("Vanish the target player.")
-	@Perm("tc.core.vanish")
+	@Desc("Toggles the target players visability.")
+	@Perm("tc.essentials.admin.vanish")
 	@Alias("v")
 	public CommandResult onClear(Context context,
-		@Desc("The player to toggle visability.") Player... players
+		@Desc("The player who's visability to toggle.") Player... targets
 	) throws CommandException{
 		CommandSource source = context.get(CommandSource.class);
 		
-		if (players.length == 0){
+		if (targets.length == 0){
 			if (source instanceof Player){
 				Player player = (Player) source;
 
@@ -46,7 +46,7 @@ public class VanishCommand {
 				return CommandResult.empty();
 			}
 		} else {
-			for (Player player : players){
+			for (Player player : targets){
 				if (player.equals(source)){
 					if (player.get(Keys.INVISIBLE).isPresent() && !player.get(Keys.INVISIBLE).get())
 					{
@@ -58,7 +58,7 @@ public class VanishCommand {
 						player.offer(Keys.INVISIBLE, false);
 						player.sendMessage(Text.of(TextColors.AQUA, "You are now visible."));
 					}
-				} else if (player.hasPermission("tc.core.vanish.others")){
+				} else if (player.hasPermission("tc.essentials.admin.vanish.others")){
 					if (player.get(Keys.INVISIBLE).isPresent() && !player.get(Keys.INVISIBLE).get())
 					{
 						player.offer(Keys.INVISIBLE, true);
@@ -71,10 +71,6 @@ public class VanishCommand {
 						player.sendMessage(Text.of(TextColors.YELLOW, source.getName(), TextColors.AQUA, " has made you visible."));
 						source.sendMessage(Text.of(TextColors.AQUA, "You made ", TextColors.YELLOW, source.getName(), TextColors.AQUA, " visible."));
 					}
-					
-					
-					source.sendMessage(Text.of(TextColors.YELLOW, player.getName(), TextColors.AQUA, " cleared your inventory."));
-					player.sendMessage(Text.of(TextColors.YELLOW, source.getName(), TextColors.AQUA, " cleared your inventory."));
 				} else {
 					throw new AuthorizationException();
 				}

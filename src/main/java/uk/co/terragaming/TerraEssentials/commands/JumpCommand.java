@@ -22,7 +22,7 @@ public class JumpCommand {
 	
 	@Command("jump")
 	@Desc("Jump to where you are looking.")
-	@Perm("tc.core.jump")
+	@Perm("tc.essentials.tp.jump")
 	public CommandResult onJump(Context context) throws CommandException{
 		CommandSource source = context.get(CommandSource.class);
 		

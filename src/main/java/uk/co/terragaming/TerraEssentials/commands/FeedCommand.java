@@ -21,14 +21,14 @@ import uk.co.terragaming.TerraCore.Util.Context;
 public class FeedCommand {
 	
 	@Command("feed")
-	@Desc("Feed the players.")
-	@Perm("tc.core.feed")
+	@Desc("Feed the target players.")
+	@Perm("tc.essentials.cheats.feed")
 	public CommandResult onFeed(Context context,
-		@Desc("The players to feed.") Player... players
+		@Desc("The players to feed.") Player... targets
 	) throws CommandException{
 		CommandSource source = context.get(CommandSource.class);
 		
-		if (players.length == 0){
+		if (targets.length == 0){
 			if (source instanceof Player){
 				Player player = (Player) source;
 				Optional<FoodData> foodData = player.getOrCreate(FoodData.class);
@@ -48,7 +48,7 @@ public class FeedCommand {
 				return CommandResult.empty();
 			}
 		} else {
-			for (Player player : players){
+			for (Player player : targets){
 				if (player.equals(source)){
 					Optional<FoodData> foodData = player.getOrCreate(FoodData.class);
 					
@@ -62,7 +62,7 @@ public class FeedCommand {
 						source.sendMessage(Text.of(TextColors.RED, "Player ", TextColors.YELLOW, player.getName(), TextColors.RED, " does not have FoodData."));
 						return CommandResult.empty();
 					}
-				} else if (player.hasPermission("tc.core.heal.others")){
+				} else if (player.hasPermission("tc.essentials.cheats.feed.others")){
 					Optional<FoodData> foodData = player.getOrCreate(FoodData.class);
 					
 					if (foodData.isPresent()){

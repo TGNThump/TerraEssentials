@@ -14,12 +14,11 @@ import uk.co.terragaming.TerraCore.Commands.exceptions.AuthorizationException;
 import uk.co.terragaming.TerraCore.Commands.exceptions.CommandException;
 import uk.co.terragaming.TerraCore.Util.Context;
 
-
 public class FlyCommand {
 	
 	@Command("fly")
-	@Desc("Toggles the players ability to fly.")
-	@Perm("tc.core.fly")
+	@Desc("Toggles the target players ability to fly.")
+	@Perm("tc.essentials.cheats.fly")
 	public CommandResult onFly(Context context,
 		@Desc("The player who's flight to toggle.") Player... players
 	) throws CommandException{
@@ -45,7 +44,7 @@ public class FlyCommand {
 					player.offer(Keys.IS_FLYING, canFly);
 					player.offer(Keys.CAN_FLY, canFly);
 					source.sendMessage(Text.of(TextColors.AQUA, "You ", (canFly ? "can now" : "can no longer"), " fly."));
-				} else if (player.hasPermission("tc.core.fly.others")){
+				} else if (player.hasPermission("tc.essentials.cheats.fly.others")){
 					boolean canFly = !player.get(Keys.CAN_FLY).get();
 					
 					player.offer(Keys.IS_FLYING, canFly);
