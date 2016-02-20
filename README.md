@@ -12,6 +12,7 @@ TerraEssentials is a [TerraCore](https://github.com/TerraGamingNetwork/TerraCore
 | **`/teleport`** <br/> `/tp` | Teleport to a world. | &lt;world&gt; | tc.essentials.tp.world |
 | **`/teleport`** <br/> `/tp` | Teleport to a player. | &lt;target&gt; | tc.essentials.tp.player |
 | **`/teleport`** <br/> `/tp` | Teleport to a player to another player. | &lt;target&gt; &lt;destination&gt; | tc.essentials.tp.player.others |
+| **`/bring`** <br/> `/tphere` | Teleport a player to you. | &lt;target&gt;... | tc.essentials.tp.player.others |
 | **`/spawn`** | Teleport to spawn. | | tc.essentials.tp.spawn |
 | **`/spawn set`** <br /> `/setspawn` | Set the spawn point. | | tc.essentials.tp.spawn.set |
 | **`/home`** | Teleport to your home. | | tc.essentials.tp.home |
