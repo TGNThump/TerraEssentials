@@ -18,17 +18,16 @@ import uk.co.terragaming.TerraCore.Commands.annotations.Perm;
 import uk.co.terragaming.TerraCore.Commands.exceptions.CommandException;
 import uk.co.terragaming.TerraCore.Util.Context;
 
-
 public class EnchantCommand {
 	
 	@Command("enchant")
-	@Desc("Enchants the item in the players hand.")
-	@Perm("tc.core.enchant")
+	@Desc("Enchants the item you are holding.")
+	@Perm("tc.essentials.cheats.enchant")
 	@Alias("ench")
 	public CommandResult onEnchant(Context context,
 			@Desc("The enchantment to apply.") Enchantment enchantment,
 			@Desc("The level enchantment to apply.") Integer level,
-			@Desc("Force the enchant if unsafe.") @Perm("tc.core.enchant.unsafe") @Alias("-f") Flag<Boolean> force
+			@Desc("Force the enchant if unsafe.") @Perm("tc.essentials.cheats.enchant.unsafe") @Alias("-f") Flag<Boolean> force
 		) throws CommandException{
 			CommandSource source = context.get(CommandSource.class);
 			
@@ -47,7 +46,7 @@ public class EnchantCommand {
 					if (!force.isPresent()){
 						if (enchantment.getMaximumLevel() < level){
 							source.sendMessage(Text.of(TextColors.RED, "Enchantment level above safe level."));
-							if (source.hasPermission("tc.core.enchant.unsafe"))
+							if (source.hasPermission("tc.essentials.cheats.enchant.unsafe"))
 								source.sendMessage(Text.of(TextColors.RED, "Use the ", TextColors.YELLOW, "-force", TextColors.RED, " flag to continue anyway."));
 							return CommandResult.empty();
 						}

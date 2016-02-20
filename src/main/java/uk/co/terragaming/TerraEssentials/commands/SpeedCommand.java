@@ -15,16 +15,15 @@ import uk.co.terragaming.TerraCore.Commands.exceptions.AuthorizationException;
 import uk.co.terragaming.TerraCore.Commands.exceptions.CommandException;
 import uk.co.terragaming.TerraCore.Util.Context;
 
-
 public class SpeedCommand {
 	
 	@Command("speed")
-	@Desc("Changes the players speed.")
-	@Perm("tc.core.speed")
+	@Desc("Sets the target players speed.")
+	@Perm("tc.essentials.cheats.speed")
 	@Alias("s")
 	public CommandResult onSpeed(Context context,
 		@Desc("The speed to set") Double speed,
-		@Desc("The players who's speed to update.") Player... players
+		@Desc("The players who's speed to set.") Player... targets
 	) throws CommandException{
 		CommandSource source = context.get(CommandSource.class);
 		
@@ -32,7 +31,7 @@ public class SpeedCommand {
 		double flySpeed = 0.05d * multiplier;
 		double walkSpeed = 0.1d * multiplier;
 		
-		if (players.length == 0){
+		if (targets.length == 0){
 			if (source instanceof Player){
 				Player player = (Player) source;
 
@@ -48,7 +47,7 @@ public class SpeedCommand {
 				return CommandResult.empty();
 			}
 		} else {
-			for (Player player : players){
+			for (Player player : targets){
 				if (player.equals(source)){
 					if (player.get(Keys.IS_FLYING).isPresent() && player.get(Keys.IS_FLYING).get()){
 						player.offer(Keys.FLYING_SPEED, flySpeed);
@@ -57,7 +56,7 @@ public class SpeedCommand {
 						player.offer(Keys.WALKING_SPEED, walkSpeed);
 						player.sendMessage(Text.of(TextColors.AQUA, "You set your walking speed to ", TextColors.YELLOW, multiplier, TextColors.AQUA, "."));
 					}
-				} else if (player.hasPermission("tc.core.speed.others")){
+				} else if (player.hasPermission("tc.essentials.cheats.speed.others")){
 					if (player.get(Keys.IS_FLYING).isPresent() && player.get(Keys.IS_FLYING).get()){
 						player.offer(Keys.FLYING_SPEED, flySpeed);
 						player.sendMessage(Text.of(TextColors.YELLOW, source.getName(), TextColors.AQUA, " set your flying speed to ", TextColors.YELLOW, multiplier, TextColors.AQUA, "."));

@@ -23,7 +23,7 @@ public class ThruCommand {
 	
 	@Command("thru")
 	@Desc("Jump through the wall in front of you.")
-	@Perm("tc.core.thru")
+	@Perm("tc.essentials.tp.thru")
 	@Alias("through")
 	public CommandResult onThru(Context context) throws CommandException{
 		CommandSource source = context.get(CommandSource.class);

@@ -18,14 +18,14 @@ import uk.co.terragaming.TerraCore.Util.Context;
 public class HealCommand {
 	
 	@Command("heal")
-	@Desc("Heal the players.")
-	@Perm("tc.core.heal")
+	@Desc("Heals the target players.")
+	@Perm("tc.essentials.cheats.heal")
 	public CommandResult onHeal(Context context,
-		@Desc("The players to heal.") Player... players
+		@Desc("The players to heal.") Player... targets
 	) throws CommandException{
 		CommandSource source = context.get(CommandSource.class);
 		
-		if (players.length == 0){
+		if (targets.length == 0){
 			if (source instanceof Player){
 				Player player = (Player) source;
 				player.offer(Keys.HEALTH, player.get(Keys.MAX_HEALTH).get());
@@ -37,13 +37,13 @@ public class HealCommand {
 				return CommandResult.empty();
 			}
 		} else {
-			for (Player player : players){
+			for (Player player : targets){
 				if (player.equals(source)){
 					player.offer(Keys.HEALTH, player.get(Keys.MAX_HEALTH).get());
 					
 					source.sendMessage(Text.of(TextColors.AQUA, "You healed yourself."));
 					return CommandResult.success();
-				} else if (player.hasPermission("tc.core.heal.others")){
+				} else if (player.hasPermission("tc.essentials.cheats.heal.others")){
 					player.offer(Keys.HEALTH, player.get(Keys.MAX_HEALTH).get());
 					
 					source.sendMessage(Text.of(TextColors.AQUA, "You healed ", TextColors.YELLOW, player.getName(), TextColors.AQUA, "."));

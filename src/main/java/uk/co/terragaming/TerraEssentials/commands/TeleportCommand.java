@@ -20,7 +20,7 @@ public class TeleportCommand {
 	
 	@Command("teleport")
 	@Desc("Teleport to a world.")
-	@Perm("tc.core.tp.world")
+	@Perm("tc.essentials.tp.world")
 	@Alias("tp")
 	public CommandResult onTpToWorld(Context context,
 		@Desc("The world to teleport to.") World world
@@ -51,7 +51,7 @@ public class TeleportCommand {
 	
 	@Command("teleport")
 	@Desc("Teleport to a player.")
-	@Perm("tc.core.tp.player")
+	@Perm("tc.essentials.tp.player")
 	@Alias("tp")
 	public CommandResult onTpToPlayer(Context context,
 		@Desc("The player to teleport to.") Player target
@@ -76,12 +76,12 @@ public class TeleportCommand {
 	}
 	
 	@Command("teleport")
-	@Desc("Teleport a player to a player.")
-	@Perm("tc.core.tp.player")
+	@Desc("Teleport a player to another player.")
+	@Perm("tc.essentials.tp.player")
 	@Alias("tp")
 	public CommandResult onTpToPlayer(Context context,
 		@Desc("The player to teleport.") Player target,
-		@Desc("The player to teleport to.") Player destination
+		@Desc("The destination player.") Player destination
 	){
 		CommandSource source = context.get(CommandSource.class);
 		
@@ -92,7 +92,7 @@ public class TeleportCommand {
 				target.sendMessage(Text.of(TextColors.RED, "Could not teleport you to ", TextColors.YELLOW, destination.getName(), TextColors.RED, "."));
 				return CommandResult.empty();
 			}
-		} else {
+		} else if (source.hasPermission("tc.essentials.tp.player.others")) {
 			if (target.setLocationSafely(destination.getLocation())){
 				source.sendMessage(Text.of(TextColors.AQUA, "Teleported ", TextColors.YELLOW, target.getName(), TextColors.AQUA, " to ", TextColors.YELLOW, destination.getName(), TextColors.AQUA, "."));
 				target.sendMessage(Text.of(TextColors.YELLOW, source.getName(), TextColors.AQUA, " teleported you to ", TextColors.YELLOW, destination.getName(), TextColors.AQUA, "."));
@@ -100,14 +100,17 @@ public class TeleportCommand {
 				source.sendMessage(Text.of(TextColors.RED, "Could not teleport ", TextColors.YELLOW, target.getName(), TextColors.RED, " to ", TextColors.YELLOW, target.getName(), TextColors.RED, "."));
 				return CommandResult.empty();
 			}
+		} else {
+			source.sendMessage(Text.of(TextColors.RED, "You do not have permission to teleport ", TextColors.YELLOW, target.getName(), TextColors.RED, " to ", TextColors.YELLOW, target.getName(), TextColors.RED, "."));
+			return CommandResult.empty();
 		}
 		
 		return CommandResult.success();
 	}
 	
 	@Command("bring")
-	@Desc("Teleport a player to me.")
-	@Perm("tc.core.tp.player")
+	@Desc("Teleport a player to you.")
+	@Perm("tc.essentials.tp.player.others")
 	@Alias("tphere")
 	public CommandResult onBring(Context context,
 		@Desc("The players to teleport.") Player... targets

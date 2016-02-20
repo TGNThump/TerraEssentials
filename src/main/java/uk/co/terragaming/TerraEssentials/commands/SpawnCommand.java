@@ -9,12 +9,10 @@ import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
-import uk.co.terragaming.TerraCore.Commands.Flag;
 import uk.co.terragaming.TerraCore.Commands.annotations.Alias;
 import uk.co.terragaming.TerraCore.Commands.annotations.Command;
 import uk.co.terragaming.TerraCore.Commands.annotations.Desc;
 import uk.co.terragaming.TerraCore.Commands.annotations.Perm;
-import uk.co.terragaming.TerraCore.Commands.exceptions.CommandException;
 import uk.co.terragaming.TerraCore.Util.Context;
 import uk.co.terragaming.TerraEssentials.config.EssentialsData;
 
@@ -26,26 +24,17 @@ public class SpawnCommand {
 	
 	@Command("spawn")
 	@Desc("Teleport to spawn.")
-	@Perm("tc.core.spawn")
-	public CommandResult onSpawn(Context context,
-		@Desc("Force the teleport if unsafe.") @Perm("tc.core.spawn.unsafe") @Alias("-f") Flag<Boolean> force	
-	) throws CommandException{
+	@Perm("tc.essentials.tp.spawn")
+	public CommandResult onSpawn(Context context){
 		CommandSource source = context.get(CommandSource.class);
 		
 		if (source instanceof Player){
 			Player player = (Player) source;
 			
-			if (force.isPresent()){
-				player.setLocation(data.spawn.get());
+			if (player.setLocationSafely(data.spawn.get())){
 				source.sendMessage(Text.of(TextColors.AQUA, "Teleported you to spawn."));
 			} else {
-				if (player.setLocationSafely(data.spawn.get())){
-					source.sendMessage(Text.of(TextColors.AQUA, "Teleported you to spawn."));
-				} else {
-					source.sendMessage(Text.of(TextColors.RED, "Could not safely teleport you to spawn."));
-					if (source.hasPermission("tc.core.spawn.unsafe"))
-						source.sendMessage(Text.of(TextColors.RED, "Use the ", TextColors.YELLOW, "-force", TextColors.RED, " flag to continue anyway."));
-				}
+				source.sendMessage(Text.of(TextColors.RED, "Could not teleport you to spawn."));
 			}
 
 			return CommandResult.success();
@@ -57,7 +46,7 @@ public class SpawnCommand {
 	
 	@Command("setspawn")
 	@Desc("Set the spawn point.")
-	@Perm("tc.core.spawn.set")
+	@Perm("tc.essentials.tp.spawn.set")
 	@Alias("spawn set")
 	public CommandResult onSpawnSet(Context context){
 		CommandSource source = context.get(CommandSource.class);

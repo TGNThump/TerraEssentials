@@ -16,8 +16,8 @@ import uk.co.terragaming.TerraCore.Util.Context;
 public class InvseeCommand {
 	
 	@Command("invsee")
-	@Desc("Look at the target players inventory.")
-	@Perm("tc.core.invsee")
+	@Desc("View at the target players inventory.")
+	@Perm("tc.essentials.admin.invsee")
 	public CommandResult onInvsee(Context context,
 		@Desc("The player whos inventory to view.") Player target
 	) throws CommandException{
