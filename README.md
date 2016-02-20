@@ -2,7 +2,7 @@
 [![Master](https://img.shields.io/badge/branch-master-orange.svg)](https://github.com/TerraGamingNetwork/TerraEssentials/tree/master) [![Build Status](https://img.shields.io/travis/TerraGamingNetwork/TerraEssentials/master.svg)](https://travis-ci.org/TerraGamingNetwork/TerraEssentials/branches) [![Code Quality](https://img.shields.io/codacy/cf4615d013ec4d37872ecbfcc58b5396/master.svg)](https://www.codacy.com/app/groovyben008/TerraEssentials) [![GitHub tags](https://img.shields.io/github/tag/TerraGamingNetwork/TerraEssentials.svg)](https://github.com/TerraGamingNetwork/TerraEssentials/tags)<br />
 [![Develop](https://img.shields.io/badge/branch-develop-orange.svg)](https://github.com/TerraGamingNetwork/TerraEssentials/tree/develop) [![Build Status](https://img.shields.io/travis/TerraGamingNetwork/TerraEssentials/develop.svg)](https://travis-ci.org/TerraGamingNetwork/TerraEssentials/branches) [![Code Quality](https://img.shields.io/codacy/cf4615d013ec4d37872ecbfcc58b5396/develop.svg)](https://www.codacy.com/app/groovyben008/TerraEssentials)
 
-TerraEssentials is a TerraCore Module that adds the essential commands needed to run a Sponge server.
+TerraEssentials is a [TerraCore](https://github.com/TerraGamingNetwork/TerraCore) Module that adds the essential commands needed to run a Sponge server.
 
 ## Commands
 
