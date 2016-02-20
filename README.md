@@ -21,8 +21,8 @@ TerraEssentials is a [TerraCore](https://github.com/TerraGamingNetwork/TerraCore
 | **`/jump`** | Jump to where you are looking. | | tc.essentials.tp.jump |
 | **`/thru`** <br /> `/through` | Jump through the wall in front of you. | | tc.essentials.tp.thru |
 |  |  |  |
-| **`/time`** | Get the current time. | | tc.essentials.world.time |
-| **`/time`** | Sets the current time. | &lt;time&gt; | tc.essentials.world.time.set |
+| **`/time`** | Get the current time. | [world] | tc.essentials.world.time |
+| **`/time`** | Sets the current time. | &lt;time&gt; [world] | tc.essentials.world.time.set |
 | **`/weather`** | Sets the current weather. | &lt;weather&gt; [duration] | tc.essentials.world.weather.set |
 |  |  |  |
 | **`/heal`** | Heals the target players. | [target]... | tc.essentials.cheats.heal,<br/>tc.essentials.cheats.heal.others |
