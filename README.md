@@ -23,7 +23,8 @@ TerraEssentials is a [TerraCore](https://github.com/TerraGamingNetwork/TerraCore
 |  |  |  |
 | **`/time`** | Get the current time. | [world] | tc.essentials.world.time |
 | **`/time`** | Sets the current time. | &lt;time&gt; [world] | tc.essentials.world.time.set |
-| **`/weather`** | Sets the current weather. | &lt;weather&gt; [duration] | tc.essentials.world.weather.set |
+| **`/weather`** | Gets the current weather. | [world] | tc.essentials.world.weather |
+| **`/weather`** | Sets the current weather. | &lt;weather&gt; [world] [duration] | tc.essentials.world.weather.set |
 |  |  |  |
 | **`/heal`** | Heals the target players. | [target]... | tc.essentials.cheats.heal,<br/>tc.essentials.cheats.heal.others |
 | **`/feed`** | Feed the target players. | [target]... | tc.essentials.cheats.feed,<br/>tc.essentials.cheats.feed.others |
