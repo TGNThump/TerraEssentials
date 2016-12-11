@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.command.source.LocatedSource;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
+import org.spongepowered.api.world.Locatable;
 import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.weather.Weather;
 
@@ -24,12 +24,12 @@ public class WeatherCommand {
 		@Desc("The world to get the weather from.") Optional<World> world
 	){
 		CommandSource source = context.get(CommandSource.class);
-		if (!(source instanceof LocatedSource) && !world.isPresent()){
+		if (!(source instanceof Locatable) && !world.isPresent()){
 			source.sendMessage(Text.of(TextColors.RED, "Please specify a world in which to get the weather."));
 			return CommandResult.empty();
 		}
 		
-		World w = world.orElse(((LocatedSource) source).getWorld());
+		World w = world.orElse(((Locatable) source).getWorld());
 		Weather weather = w.getWeather();
 		
 		source.sendMessage(Text.of(TextColors.AQUA, "The current weather in ", TextColors.YELLOW, w.getName(), TextColors.AQUA, " is ", TextColors.YELLOW, weather.getName(), TextColors.AQUA, "."));
@@ -45,14 +45,14 @@ public class WeatherCommand {
 		@Desc("The duration to forecast.") Optional<Long> duration
 	){
 		CommandSource source = context.get(CommandSource.class);
-		if (!(source instanceof LocatedSource) && !world.isPresent()){
+		if (!(source instanceof Locatable) && !world.isPresent()){
 			source.sendMessage(Text.of(TextColors.RED, "Please specify a world in which to get the time."));
 			return CommandResult.empty();
 		}
 		
-		World w = world.orElse(((LocatedSource) source).getWorld());
-		if (duration.isPresent()) w.forecast(weather, duration.get());
-		else w.forecast(weather);
+		World w = world.orElse(((Locatable) source).getWorld());
+		if (duration.isPresent()) w.setWeather(weather, duration.get());
+		else w.setWeather(weather);
 		source.sendMessage(Text.of(TextColors.AQUA, "You set the weather in ", TextColors.YELLOW, w.getName(), TextColors.AQUA, " to ", TextColors.YELLOW, weather.getName(), TextColors.AQUA, "."));
 		
 		return CommandResult.success();

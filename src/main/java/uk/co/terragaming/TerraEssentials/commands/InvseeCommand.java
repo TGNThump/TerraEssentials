@@ -3,6 +3,8 @@ package uk.co.terragaming.TerraEssentials.commands;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.event.cause.Cause;
+import org.spongepowered.api.event.cause.NamedCause;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
@@ -25,7 +27,7 @@ public class InvseeCommand {
 		
 		if (source instanceof Player){
 			Player player = (Player) source;
-			player.openInventory(target.getInventory());
+			player.openInventory(target.getInventory(), Cause.of(NamedCause.simulated(player)));
 			
 			source.sendMessage(Text.of(TextColors.AQUA, "You looked at ", TextColors.YELLOW, target.getName(), TextColors.AQUA, "s inventory."));
 			return CommandResult.success();

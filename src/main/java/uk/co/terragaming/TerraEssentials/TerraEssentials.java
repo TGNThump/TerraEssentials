@@ -46,37 +46,37 @@ public class TerraEssentials extends GuiceModule{
 	CorePlugin plugin;
 	
 	@Inject
-	MethodCommandService commandService;
+	MethodCommandService commands;
 	
 	@Inject
-	EventManager manager;
+	EventManager events;
 	
 	private EssentialsData data;
 	
 	@Listener
     public void onInitialize(GameInitializationEvent event) {
-		commandService.registerCommands(plugin, new GamemodeCommand());
-		commandService.registerCommands(plugin, new FlyCommand());
-		commandService.registerCommands(plugin, new SpeedCommand());
-		commandService.registerCommands(plugin, new ClearCommand());
-		commandService.registerCommands(plugin, new EnchantCommand());
-		commandService.registerCommands(plugin, new HealCommand());
-		commandService.registerCommands(plugin, new FeedCommand());
-		commandService.registerCommands(plugin, new InvseeCommand());
-		commandService.registerCommands(plugin, new ThruCommand());
-		commandService.registerCommands(plugin, new JumpCommand());
-		commandService.registerCommands(plugin, new VanishCommand());
-		commandService.registerCommands(plugin, new WeatherCommand());
-		commandService.registerCommands(plugin, new SpawnCommand());
-		commandService.registerCommands(plugin, new TimeCommand());
-		commandService.registerCommands(plugin, new HomeCommand());
-		commandService.registerCommands(plugin, new TeleportCommand());
+		commands.registerCommands(plugin, new GamemodeCommand());
+		commands.registerCommands(plugin, new FlyCommand());
+		commands.registerCommands(plugin, new SpeedCommand());
+		commands.registerCommands(plugin, new ClearCommand());
+		commands.registerCommands(plugin, new EnchantCommand());
+		commands.registerCommands(plugin, new HealCommand());
+		commands.registerCommands(plugin, new FeedCommand());
+		commands.registerCommands(plugin, new InvseeCommand());
+		commands.registerCommands(plugin, new ThruCommand());
+		commands.registerCommands(plugin, new JumpCommand());
+		commands.registerCommands(plugin, new VanishCommand());
+		commands.registerCommands(plugin, new WeatherCommand());
+		commands.registerCommands(plugin, new SpawnCommand());
+		commands.registerCommands(plugin, new TimeCommand());
+		commands.registerCommands(plugin, new HomeCommand());
+		commands.registerCommands(plugin, new TeleportCommand());
 	}
 	
 	@Listener
 	public void onServerStarting(GameStartingServerEvent event){
 		data = new EssentialsData();
-		manager.registerListeners(plugin, inject(new PlayerJoinListener()));
+		events.registerListeners(plugin, inject(new PlayerJoinListener()));
 	}
 	
 	@Listener

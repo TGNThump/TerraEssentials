@@ -2,10 +2,10 @@ package uk.co.terragaming.TerraEssentials.commands;
 
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
-import org.spongepowered.api.command.source.LocatedSource;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
+import org.spongepowered.api.world.Locatable;
 import org.spongepowered.api.world.World;
 
 import uk.co.terragaming.TerraCore.Commands.annotations.Alias;
@@ -117,12 +117,12 @@ public class TeleportCommand {
 	){
 		CommandSource source = context.get(CommandSource.class);
 		
-		if (source instanceof LocatedSource){
-			LocatedSource locatedSource = (LocatedSource) source;
+		if (source instanceof Locatable){
+			Locatable locatedSource = (Locatable) source;
 			
 			for (Player target : targets){
 				if (target.setLocationSafely(locatedSource.getLocation())){
-					target.sendMessage(Text.of(TextColors.YELLOW, locatedSource.getName(), TextColors.AQUA, " teleported you to them."));
+					target.sendMessage(Text.of(TextColors.YELLOW, source.getName(), TextColors.AQUA, " teleported you to them."));
 					source.sendMessage(Text.of(TextColors.AQUA, "Teleported ", TextColors.YELLOW, target.getName(), TextColors.AQUA, " to you."));					
 				} else {
 					source.sendMessage(Text.of(TextColors.RED, "Could not teleport ", TextColors.YELLOW, target.getName(), TextColors.RED, " to you."));

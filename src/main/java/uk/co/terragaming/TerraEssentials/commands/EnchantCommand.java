@@ -4,6 +4,7 @@ import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.data.manipulator.mutable.item.EnchantmentData;
 import org.spongepowered.api.data.meta.ItemEnchantment;
+import org.spongepowered.api.data.type.HandTypes;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.Enchantment;
 import org.spongepowered.api.item.inventory.ItemStack;
@@ -34,9 +35,9 @@ public class EnchantCommand {
 			if (source instanceof Player){
 				Player player = (Player) source;
 				
-				if (player.getItemInHand().isPresent()){
+				if (player.getItemInHand(HandTypes.MAIN_HAND).isPresent()){
 					
-					ItemStack itemInHand = player.getItemInHand().get();
+					ItemStack itemInHand = player.getItemInHand(HandTypes.MAIN_HAND).get();
 					
 					if (!enchantment.canBeAppliedByTable(itemInHand)){
 						source.sendMessage(Text.of(TextColors.RED, "This enchantment cannot be applied to this item."));
@@ -71,7 +72,7 @@ public class EnchantCommand {
 					}
 					
 					itemInHand.offer(enchantData);
-					player.setItemInHand(itemInHand);
+					player.setItemInHand(HandTypes.MAIN_HAND, itemInHand);
 					player.sendMessage(Text.of(TextColors.AQUA, "Enchanted item(s) in your hand."));
 					
 				} else {
